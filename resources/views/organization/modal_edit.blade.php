@@ -14,26 +14,28 @@
                     <label>Name</label>
                     <input type="text" name="name" value="{{ $user->name }}" class="form-control">
                 </div>
-                <div class="form-group">
-                    <label>Organization</label>
-                    <select name="org_id" class="form-control">
-                        @foreach ($organizations as $key => $o)
-                            @if ($user->organization_id === $o->id)
-                                <option value="{{ $o->id }}" selected>{{ $o->name }}</option> 
-                            @else 
-                                <option value="{{ $o->id }}">{{ $o->name }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
+                
                 <div class="form-group">
                     <label>Role</label>
                     <select name="role_id" class="form-control">
                         @foreach ($roles as $key => $r)
                             @if ($user->role_id === $r->id)
                                 <option value="{{ $r->id }}" selected>{{ $r->name }}</option>
-                            @else 
-                                <option value="{{ $r->id }}">{{ $r->name }}</option>
+                            @else
+                                @if ($r->id !== 3)
+                                    <option value="{{ $r->id }}">{{ $r->name }}</option>
+                                @endif 
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Organization</label>
+                    <select name="org_id" class="form-control">
+                        @foreach ($organizations as $key => $o)
+                            @if ($user->organization_id === $o->id)
+                                <option value="{{ $o->id }}" selected>{{ $o->name }}</option> 
                             @endif
                         @endforeach
                     </select>

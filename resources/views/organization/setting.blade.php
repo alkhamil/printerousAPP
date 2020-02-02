@@ -48,9 +48,16 @@
             </div>
         </div>
     </div>
+    <div class="row mt-2">
+        <div class="col">
+            <button onclick="OrgModalAdd()" class="btn btn-outline-primary">
+                <i class="fa fa-plus"></i> Tambah PIC
+            </button>
+        </div>
+    </div>
     <div class="card shadow mb-4 mt-2">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Daftar User di {{ $organization->name }}</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Daftar PIC di {{ $organization->name }}</h6>
       </div>
       <div class="card-body">
         <div class="row">
@@ -124,21 +131,38 @@
 </div>
 
 <div class="modal fade" id="OrgModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="row loader" style="padding: 20px">
-          <div class="col-md-12">
-            <div class="text-center">
-              <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
-            </div>
-          </div>
+<div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    <div class="row loader" style="padding: 20px">
+        <div class="col-md-12">
+        <div class="text-center">
+            <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
         </div>
-        <div id="OrgModalEditbody">
-  
         </div>
-      </div>
     </div>
-  </div>
+    <div id="OrgModalEditbody">
+
+    </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="OrgModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="row loader" style="padding: 20px">
+            <div class="col-md-12">
+            <div class="text-center">
+                <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
+            </div>
+            </div>
+        </div>
+        <div id="OrgModalAddbody">
+    
+        </div>
+        </div>
+    </div>
+    </div>
 @endsection
 
 <script>
@@ -150,5 +174,15 @@
             $('.loader').hide();
             $('#OrgModalEditbody').html(data);
         });
+    }
+
+    function OrgModalAdd() {
+        $('#OrgModalAddbody').html(null);
+        $('#OrgModalAdd').modal();
+        $('.loader').show();
+        $.get('{{ route('organization.modal.add') }}', function(data) {
+            $('.loader').hide();
+            $('#OrgModalAddbody').html(data);
+        })
     }
 </script>

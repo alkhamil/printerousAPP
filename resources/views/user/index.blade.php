@@ -7,7 +7,7 @@
     <h1 class="h3 mb-2 text-gray-800">User</h1>
     <div class="mb-1">
         <a href="{{ route('user.create') }}" class="btn btn-outline-primary">
-            <i class="fa fa-plus"></i> Tambah User Baru
+            <i class="fa fa-plus"></i> Tambah PIC Baru
         </a>
     </div>
     <!-- DataTales Example -->
@@ -80,7 +80,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        Apakah anda yakin ingin mengahpus user <strong>{{ $u->name }}</strong> ?
+                        Apakah anda yakin ingin mengahpus PIC <strong>{{ $u->name }}</strong> ?
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

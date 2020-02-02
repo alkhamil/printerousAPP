@@ -25,7 +25,11 @@
   <div class="container">
     <div class="row mt-5">
         <div class="col-md-12">
-            <a href="{{ route('login.index') }}" class="btn btn-warning">Login</a>
+            @if (Auth::check() === true)
+                <a href="{{ route('dashboard.index') }}" class="btn btn-primary">Dashboard</a>
+            @else
+                <a href="{{ route('login.index') }}" class="btn btn-warning">Login</a>
+            @endif
         </div>
     </div>
     <!-- Outer Row -->
@@ -60,7 +64,7 @@
                                     <h4 class="text-black-50">1. Login Page</h4>
                                     <img src="{{ url('user_guide/login.png') }}" class="img-fluid">
                                     <div class="mt-2" style="color: black">
-                                        <p>Semua user yang telah di daftarkan di printerousAPP bisa login di halaman ini. <br>
+                                        <p>Semua PIC / User yang telah di daftarkan di printerousAPP bisa login di halaman ini. <br>
                                         Syarat login harus menggunakan email dan password <br>
                                         Untuk uji coba silahkan login menggunakan : <br>
                                         </p>
@@ -69,11 +73,11 @@
                                             email : admin@pr.com <br>
                                             password : polisi86 <br><br>
 
-                                            <b>User Account Manager</b> <br>
+                                            <b>PIC Account Manager</b> <br>
                                             email : naz@mozastudio.com <br>
                                             password : polisi86 <br><br>
 
-                                            <b>User Staff</b> <br>
+                                            <b>PIC Staff</b> <br>
                                             email : dea@mozastudio.com <br>
                                             password : polisi86 <br>
                                         </p>
@@ -92,15 +96,15 @@
                                     <img src="{{ url('user_guide/dashboard.png') }}" class="img-fluid">
                                     <div class="mt-2" style="color: black">
                                         <p>
-                                            Semua user yang logged in dapat mengakses dan melihat halaman dashboard <br>
+                                            Semua PIC yang logged in dapat mengakses dan melihat halaman dashboard <br>
                                             di halaman dashboard ini hanya menampilkan jumlah dari semua organisasi dan user yang terdaftar di organisasi
                                         </p>
 
                                         <p>
                                             <b>Note:</b> <br>
-                                            Peran admin bisa memanage organisasi, user <br>
+                                            Peran admin bisa memanage organisasi dan pic <br>
                                             Peran account manager bisa memanage organisasi nya sendiri <br>
-                                            Peran staff hanya bisa melihat data organisasi dan user
+                                            Peran staff hanya bisa melihat data organisasi dan pic
                                         </p>
                                         
                                     </div>
@@ -112,18 +116,23 @@
                 <div class="tab-pane fade" id="pills-page-organization" role="tabpanel" aria-labelledby="pills-page-organization-tab">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row" style="color: black;">
                                 <div class="col-md-12">
                                     <h4 class="text-black-50">3. Organization Page</h4>
-                                    <img src="{{ url('user_guide/org_list.png') }}" class="img-fluid mt-2">
+                                    <p class="mt-2">a. Halaman daftar organisasi</p>
+                                    <img src="{{ url('user_guide/org_list.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/org_add.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">b. Feature tambah organisai</p>
+                                    <img src="{{ url('user_guide/org_add.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/org_update.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">c. Feature ubah organisasi</p>
+                                    <img src="{{ url('user_guide/org_update.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/org_detail.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">d. Feature detail organisasi</p>
+                                    <img src="{{ url('user_guide/org_detail.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/org_delete.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">e. Feature delete organisasi</p>
+                                    <img src="{{ url('user_guide/org_delete.png') }}" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -132,16 +141,20 @@
                 <div class="tab-pane fade" id="pills-page-user" role="tabpanel" aria-labelledby="pills-page-user-tab">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row" style="color: black;">
                                 <div class="col-md-12">
                                     <h4 class="text-black-50">4. User Management Page</h4>
-                                    <img src="{{ url('user_guide/user_list.png') }}" class="img-fluid mt-2">
+                                    <p class="mt-2">a. Halaman daftar semua pic</p>
+                                    <img src="{{ url('user_guide/user_list.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/user_add.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">b. Feature tambah pic</p>
+                                    <img src="{{ url('user_guide/user_add.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/user_update.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">c. Feature ubah pic</p>
+                                    <img src="{{ url('user_guide/user_update.png') }}" class="img-fluid">
                                     
-                                    <img src="{{ url('user_guide/user_delete.png') }}" class="img-fluid mt-3">
+                                    <p class="mt-3">a. Feature hapus pic</p>
+                                    <img src="{{ url('user_guide/user_delete.png') }}" class="img-fluid">
                                 </div>
                             </div>
                         </div>

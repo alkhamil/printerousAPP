@@ -34,10 +34,17 @@
             <!-- Nested Row within Card Body -->
             <div class="text-center">
                 <h3>Selamat datang di PrinterousAPP</h1>
-                <p>Silahkan login!</p>
-                <a href="{{ route('login.index') }}" class="btn btn-block btn-primary">
-                    Login
-                </a>
+                  @if (Auth::check() !== true)
+                  <p>Silahkan login!</p>
+                  <a href="{{ route('login.index') }}" class="btn btn-block btn-primary">
+                      Login
+                  </a>
+                @else
+                  <p>Anda sudah login.</p>
+                  <a href="{{ route('dashboard.index') }}" class="btn btn-block btn-primary">
+                      Dashboard
+                  </a>
+                @endif
                 <a href="{{ route('user.guide') }}" class="btn btn-block btn-success">
                     User Guide
                 </a>

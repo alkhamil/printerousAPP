@@ -11,8 +11,11 @@
 |
 */
 
-Route::get('/login', 'LoginCtrl@index')->name('login.index');
-Route::post('/login-proses', 'LoginCtrl@login_proses')->name('login.proses');
+Route::group(['middleware' => ['guest']], function () {
+    Route::get('/login', 'LoginCtrl@index')->name('login.index');
+    Route::post('/login-proses', 'LoginCtrl@login_proses')->name('login.proses');
+});
+
 Route::get('/', 'DashboardCtrl@landing_page')->name('landing.page');
 Route::get('/user-guide', 'DashboardCtrl@user_guide')->name('user.guide');
 
@@ -27,18 +30,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/organization-update', 'OrganizationCtrl@update_proses')->name('organization.update.proses');
     Route::post('/organization-details', 'OrganizationCtrl@details')->name('organization.details');
     Route::get('/organization-settings/{id}', 'OrganizationCtrl@settings')->name('organization.settings');
+    Route::get('/organization-modal-add', 'OrganizationCtrl@modal_add')->name('organization.modal.add');
+    Route::post('/organization-modal-add-proses', 'OrganizationCtrl@modal_add_proses')->name('organization.modal.add.proses');
     Route::post('/organization-modal-edit', 'OrganizationCtrl@modal_edit')->name('organization.modal.edit');
     Route::post('/organization-modal-edit-proses', 'OrganizationCtrl@modal_edit_proses')->name('organization.modal.edit.proses');
     Route::get('/organization-modal-delete-proses/{id}', 'OrganizationCtrl@modal_delete_proses')->name('organization.modal.delete');
     Route::get('/organization-destroy/{id}', 'OrganizationCtrl@destroy')->name('organization.destroy');
 
-    Route::get('/user', 'UserCtrl@index')->name('user.index');
-    Route::get('/user-create', 'UserCtrl@create')->name('user.create');
-    Route::post('/user-create', 'UserCtrl@create_proses')->name('user.create.proses');
-    Route::get('/user-update/{id}', 'UserCtrl@update')->name('user.update');
-    Route::post('/user-update', 'UserCtrl@update_proses')->name('user.update.proses');
-    Route::get('/user-details', 'UserCtrl@details')->name('user.details');
-    Route::get('/user-destroy/{id}', 'UserCtrl@destroy')->name('user.destroy');
+    Route::group(['middleware' => ['admin']], function () {
+        Route::get('/user', 'UserCtrl@index')->name('user.index');
+        Route::get('/user-create', 'UserCtrl@create')->name('user.create');
+        Route::post('/user-create', 'UserCtrl@create_proses')->name('user.create.proses');
+        Route::get('/user-update/{id}', 'UserCtrl@update')->name('user.update');
+        Route::post('/user-update', 'UserCtrl@update_proses')->name('user.update.proses');
+        Route::get('/user-details', 'UserCtrl@details')->name('user.details');
+        Route::get('/user-destroy/{id}', 'UserCtrl@destroy')->name('user.destroy');
+    });
 });
 
 

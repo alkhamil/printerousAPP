@@ -102,6 +102,37 @@ class OrganizationCtrl extends Controller
         return view('organization.setting', compact('organization'));
     }
 
+    public function modal_add(Request $request)
+    {
+        $organizations = Organization::all();
+        $roles = Role::all();
+        return view('organization.modal_add', compact('organizations', 'roles'));
+    }
+
+    public function modal_add_proses(Request $request)
+    {
+        dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required',
+            'password' => 'required|string|min:6',
+            'avatar' => 'required',
+        ]);
+        $user = new User;
+        $user->organization_id = $request->org_id;
+        $user->role_id = $request->role_id;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->password = Hash::make($request->password);
+        $user->avatar = $request->file('avatar')->store('uploads/avatar');
+        if ($user->save()) {
+            $request->session()->flash('message', 'Data berhasil tersimpan!');
+            return redirect('user');
+        }
+    }
+
     public function modal_edit(Request $request)
     {
         $organizations = Organization::all();
