@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template -->
   <link href="{{ url('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
+  <link href="{{ url('admin/css/custom.css') }}" rel="stylesheet">
 
   <!-- Custom styles for this page -->
   <link href="{{ url('admin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
@@ -53,7 +54,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; PrinterousAPP 2020</span>
           </div>
         </div>
       </footer>

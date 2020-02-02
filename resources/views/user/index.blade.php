@@ -7,7 +7,7 @@
     <h1 class="h3 mb-2 text-gray-800">User</h1>
     <div class="mb-1">
         <a href="{{ route('user.create') }}" class="btn btn-outline-primary">
-            <i class="fa fa-plus"></i> Add New User
+            <i class="fa fa-plus"></i> Tambah User Baru
         </a>
     </div>
     <!-- DataTales Example -->
@@ -18,7 +18,7 @@
     @endif
     <div class="card shadow mb-4">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">User List</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Daftar User</h6>
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -30,6 +30,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Avatar</th>
+                <th>Role</th>
                 <th>Options</th>
               </tr>
             </thead>
@@ -41,20 +42,53 @@
                     <td>{{ $u->email }}</td>
                     <td>{{ $u->phone }}</td>
                     <td>
-                        <img src="{{ url($u->avatar) }}" alt="{{$u->avatar}}" class="img-fluid" width="80">
+                        <img src="{{ asset($u->avatar) }}" alt="{{$u->avatar}}" class="img-fluid" width="80">
                     </td>
                     <td>
-                        <a href="{{ route('user.update') }}" class="btn btn-primary btn-sm">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="{{ route('user.details') }}" class="btn btn-secondary btn-sm">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                        <a href="{{ route('user.destroy') }}" class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                      @php
+                          $org = \App\Organization::where('id', $u->organization_id)->first();
+                      @endphp
+                      @if ($u->role_id === 1)
+                          <div class="badge badge-success">Account Manager</div><i> dari {{ $org->name }}</i>
+                      @elseif ($u->role_id === 2)
+                          <div class="badge badge-info">Staff</div><i> dari {{ $org->name }}</i>
+                      @elseif ($u->role_id === 3)
+                          <div class="badge badge-primary">Is Admin</div><i></i>
+                      @endif
+                    </td>
+                    <td>
+                        @if ($u->role_id !== 3)
+                          <a href="{{ route('user.update', encrypt($u->id)) }}" class="btn btn-primary btn-circle btn-sm">
+                              <i class="fa fa-edit"></i>
+                          </a>
+                          <button data-toggle="modal" data-target="#delete{{ $u->id }}" class="btn btn-danger btn-circle btn-sm">
+                              <i class="fa fa-trash"></i>
+                          </button>
+                        @else 
+                          <div class="badge badge-success">Readonly</div>
+                        @endif
                     </td>
                 </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="delete{{ $u->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Menghapus data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        Apakah anda yakin ingin mengahpus user <strong>{{ $u->name }}</strong> ?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{ route('user.destroy', $u->id) }}" class="btn btn-primary">Ya, Hapus</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               @endforeach
             </tbody>
           </table>

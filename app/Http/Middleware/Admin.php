@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class AccountManager
+class Admin
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AccountManager
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role_id === 1) {
+        if (Auth::user()->role_id === 3) {
             return $next($request);
         }else {
             return redirect('dashboard');

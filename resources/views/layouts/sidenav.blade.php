@@ -15,17 +15,34 @@
         <span>Dashboard</span></a>
     </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('organization.index') }}">
-        <i class="fas fa-fw fa-sitemap"></i>
-        <span>Organization</span></a>
-    </li>
+    @if (Auth::user()->role_id === 1)
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('organization.index') }}">
+          <i class="fas fa-fw fa-sitemap"></i>
+          <span>Organization</span></a>
+      </li>
+    @endif
 
-    <li class="nav-item">
-      <a class="nav-link" href="{{ route('user.index') }}">
-        <i class="fas fa-fw fa-user"></i>
-        <span>User Management</span></a>
-    </li>
+    @if (Auth::user()->role_id === 2)
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('organization.index') }}">
+          <i class="fas fa-fw fa-sitemap"></i>
+          <span>Organization</span></a>
+      </li>
+    @endif
+    
+    @if (Auth::user()->role_id === 3)
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('organization.index') }}">
+          <i class="fas fa-fw fa-sitemap"></i>
+          <span>Organization</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('user.index') }}">
+          <i class="fas fa-fw fa-user"></i>
+          <span>User Management</span></a>
+      </li>
+    @endif
 
     <!-- Divider -->
     <hr class="sidebar-divider">

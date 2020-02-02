@@ -10,4 +10,14 @@ class DashboardCtrl extends Controller
     {
         return view('dashboard.index');
     }
+
+    public function landing_page()
+    {
+        return view('dashboard.landing_page');
+    }
+
+    public function user_guide()
+    {
+        return view('dashboard.user_guide');
+    }
 }
