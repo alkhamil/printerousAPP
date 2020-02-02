@@ -5,6 +5,17 @@
       <i class="fa fa-bars"></i>
     </button>
 
+    <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+      <div class="input-group">
+        <input type="text" id="q" class="form-control bg-light border-0 small" placeholder="Cari Organisasi" aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button onclick="search()" class="btn btn-primary">
+            <i class="fas fa-search fa-sm"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
 

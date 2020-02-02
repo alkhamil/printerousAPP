@@ -120,36 +120,4 @@
       </div>
     </div>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="OrgModaldetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="row loader" style="padding: 20px">
-        <div class="col-md-12">
-          <div class="text-center">
-            <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
-          </div>
-        </div>
-      </div>
-      <div id="OrgDetailbody">
-
-      </div>
-    </div>
-  </div>
-</div>
-
 @endsection
-
-
-<script>
-  function OrgDetail(id) {
-      $('#OrgDetailbody').html(null);
-      $('#OrgModaldetail').modal();
-      $('.loader').show();
-      $.post('{{ route('organization.details') }}', {_token:'{{ csrf_token() }}', org_id:id}, function(data){
-          $('.loader').hide();
-          $('#OrgDetailbody').html(data);
-      });
-  }
-</script>

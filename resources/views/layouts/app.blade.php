@@ -90,6 +90,74 @@
     </div>
   </div>
 
+  <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="row loader" style="padding: 20px">
+            <div class="col-md-12">
+            <div class="text-center">
+                <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
+            </div>
+            </div>
+        </div>
+        <div id="searchbody">
+    
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="modal fade" id="OrgModaldetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="row loader" style="padding: 20px">
+            <div class="col-md-12">
+              <div class="text-center">
+                <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
+              </div>
+            </div>
+          </div>
+          <div id="OrgDetailbody">
+    
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="OrgModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+          <div class="row loader" style="padding: 20px">
+              <div class="col-md-12">
+              <div class="text-center">
+                  <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
+              </div>
+              </div>
+          </div>
+          <div id="OrgModalEditbody">
+      
+          </div>
+          </div>
+      </div>
+      </div>
+      
+      <div class="modal fade" id="OrgModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+          <div class="row loader" style="padding: 20px">
+              <div class="col-md-12">
+              <div class="text-center">
+                  <i class="fa fa-spinner" style="font-size: 30px; color: black;"></i>
+              </div>
+              </div>
+          </div>
+          <div id="OrgModalAddbody">
+      
+          </div>
+          </div>
+      </div>
+      </div>
+
   <!-- Bootstrap core JavaScript-->
   <script src="{{ url('admin/vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ url('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -107,6 +175,48 @@
   <!-- Page level custom scripts -->
   <script src="{{ url('admin/js/demo/datatables-demo.js') }}"></script>
 
+  <script>
+    function search() {
+      var q = $('#q').val();
+      $('#searchbody').html(null);
+      $('#search').modal();
+      $('.loader').show();
+      $.post('{{ route('search') }}', {_token:'{{ csrf_token() }}', q:q}, function(data){
+          $('.loader').hide();
+          $('#searchbody').html(data);
+      });
+    }
+
+    function OrgDetail(id) {
+        $('#OrgDetailbody').html(null);
+        $('#OrgModaldetail').modal();
+        $('.loader').show();
+        $.post('{{ route('organization.details') }}', {_token:'{{ csrf_token() }}', org_id:id}, function(data){
+            $('.loader').hide();
+            $('#OrgDetailbody').html(data);
+        });
+    }
+
+    function OrgModalEdit(id) {
+        $('#OrgModalEditbody').html(null);
+        $('#OrgModalEdit').modal();
+        $('.loader').show();
+        $.post('{{ route('organization.modal.edit') }}', {_token:'{{ csrf_token() }}', user_id:id}, function(data){
+            $('.loader').hide();
+            $('#OrgModalEditbody').html(data);
+        });
+    }
+
+    function OrgModalAdd() {
+        $('#OrgModalAddbody').html(null);
+        $('#OrgModalAdd').modal();
+        $('.loader').show();
+        $.get('{{ route('organization.modal.add') }}', function(data) {
+            $('.loader').hide();
+            $('#OrgModalAddbody').html(data);
+        })
+    }
+  </script>
 </body>
 
 </html>

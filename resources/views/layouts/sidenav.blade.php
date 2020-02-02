@@ -44,6 +44,12 @@
       </li>
     @endif
 
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('user.guide') }}">
+        <i class="fas fa-fw fa-book"></i>
+        <span>User Guide</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider">
 

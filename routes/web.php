@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'DashboardCtrl@index')->name('dashboard.index');
     Route::get('/logout', 'LoginCtrl@logout')->name('logout');
 
+    Route::post('/search', 'DashboardCtrl@search')->name('search');
+
     Route::get('/organization', 'OrganizationCtrl@index')->name('organization.index');
     Route::get('/organization-create', 'OrganizationCtrl@create')->name('organization.create');
     Route::post('/organization-create', 'OrganizationCtrl@create_proses')->name('organization.create.proses');

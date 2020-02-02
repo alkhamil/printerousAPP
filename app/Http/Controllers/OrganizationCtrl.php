@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Organization;
 use App\User;
 use App\Role;
+use Hash;
 
 class OrganizationCtrl extends Controller
 {
@@ -111,7 +112,6 @@ class OrganizationCtrl extends Controller
 
     public function modal_add_proses(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -129,7 +129,7 @@ class OrganizationCtrl extends Controller
         $user->avatar = $request->file('avatar')->store('uploads/avatar');
         if ($user->save()) {
             $request->session()->flash('message', 'Data berhasil tersimpan!');
-            return redirect('user');
+            return back();
         }
     }
 
